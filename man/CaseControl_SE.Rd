@@ -5,7 +5,7 @@
 \title{function to calculate case/control/population frequencies from summary data
 uses the GroupFreq function adapted from C from https://github.com/Paschou-Lab/ReAct/blob/main/GrpPRS_src/CountConstruct.c}
 \usage{
-CaseControl_SE(OR, se, nCase, nControl, AF_obs = 0)
+CaseControl_SE(OR, se, nCase, nControl, AF_obs)
 }
 \arguments{
 \item{OR}{a vector of odds ratios}
