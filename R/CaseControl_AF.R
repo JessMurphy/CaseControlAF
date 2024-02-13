@@ -22,7 +22,7 @@ CaseControl_AF <- function(N_case, N_control, AF_population, OR){
   
   for(i in 1:length(a)) {
     #find roots of quadratic eq and choose root between 0 and 1 as AF_control
-    AF_control_opts =  quad_roots(a[i], b[i], c[i])
+    AF_control_opts =  genpwr::quad_roots(a[i], b[i], c[i])
     if(AF_control_opts[1]>1 | AF_control_opts[1]<0){
       AF_control[i] = AF_control_opts[2]
     }else{
