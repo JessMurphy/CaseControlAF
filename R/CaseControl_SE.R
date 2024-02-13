@@ -91,7 +91,7 @@ GroupFreq <- function(se, nCase, nControl, OR, freq = 0.0) {
 #' @param nCase an integer of the number of Case individuals
 #' @param nControl an integer of the number of Control individuals
 #' @return a dataframe with 3 columns: pCase, pControl, pPop for the estimated AFs for each variant which are the rows
-CaseControl_SE <- function(OR, se, nCase, nControl, AF_obs) {
+CaseControl_SE <- function(OR, se, nCase, nControl) {
   res <- data.frame(pCase = rep(0, length(OR)),
                     pControl = rep(0, length(OR)),
                     pPop = rep(0, length(OR)))
