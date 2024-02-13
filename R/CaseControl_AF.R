@@ -8,7 +8,7 @@
 #' equal to the number of variants
 CaseControl_AF <- function(N_case, N_control, AF_population, OR){
   
-  require(genpwr)
+  require('genpwr')
   
   #calculate total sample size
   N_total = N_control+N_case
