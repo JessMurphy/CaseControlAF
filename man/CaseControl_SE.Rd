@@ -11,9 +11,9 @@ CaseControl_SE(OR, SE, N_case, N_control)
 
 \item{se}{a vector of standard errors for the OR calculation *make sure the indices match between the two vectors}
 
-\item{nCase}{an integer of the number of Case individuals}
+\item{N_case}{an integer of the number of Case individuals}
 
-\item{nControl}{an integer of the number of Control individuals}
+\item{N_control}{an integer of the number of Control individuals}
 }
 \value{
 a dataframe with 3 columns: pCase, pControl, pPop for the estimated AFs for each variant which are the rows
