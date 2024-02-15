@@ -58,8 +58,8 @@ Use this function when you have the following statistics (for each variant)
 ```
 nCase = 1000
 nControl = 5000
-af = c(.82, .43, .22, .40, .04)
+ors = c(1.1, 1.22, 1.01, 1.05, 0.95)
 se = c(.0025, .004, .0054, .002, .051)
 
-CaseControl_AF(N_case = nCase, N_control = nControl, AF_population = af, SE = se)
+CaseControl_AF(N_case = nCase, N_control = nControl, OR = ors, SE = se)
 ```
