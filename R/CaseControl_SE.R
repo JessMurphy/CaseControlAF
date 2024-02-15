@@ -84,14 +84,18 @@ GroupFreq <- function(se, nCase, nControl, OR, freq = 0.0) {
   return(resFrq)
 }
 
-#' function to calculate case/control/population frequencies from summary data
-#' uses the GroupFreq function adapted from C from https://github.com/Paschou-Lab/ReAct/blob/main/GrpPRS_src/CountConstruct.c
+#' @title CaseControl_SE
+#' @description This is a function to derive the case and control AFs from GWAS summary statistics when 
+#' the user has access to the whole sample AF, the sample sizes, and the OR (or beta).
+#' If user has SE instead of sample AF use [CaseControlAF::CaseControl_SE()]
+#' This code uses the GroupFreq function adapted from C from <https://github.com/Paschou-Lab/ReAct/blob/main/GrpPRS_src/CountConstruct.c>
 #' @param OR a vector of odds ratios
 #' @param se a vector of standard errors for the OR calculation *make sure the indices match between the two vectors
 #' @param nCase an integer of the number of Case individuals
 #' @param nControl an integer of the number of Control individuals
 #' @return a dataframe with 3 columns: pCase, pControl, pPop for the estimated AFs for each variant which are the rows
-CaseControl_SE <- function(OR, se, nCase, nControl) {
+#' @export 
+CaseControl_SE <- function(OR, se, nCase, nControl, AF_obs = 0) {
   res <- data.frame(pCase = rep(0, length(OR)),
                     pControl = rep(0, length(OR)),
                     pPop = rep(0, length(OR)))

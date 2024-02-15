@@ -1,14 +1,22 @@
-#' Method to reconstruct case and control AFs from the sample observed AF
+#' @title CaseControl_AF
+#' @description
+#' This is a function to derive the case and control AFs from GWAS summary statistics when 
+#' the user has access to the whole sample AF, the sample sizes, and the OR (or beta).
+#' If user has SE instead of sample AF use [CaseControlAF::CaseControl_SE()]
+#' 
 #' @param N_case the number of cases in the sample
 #' @param N_control the number of controls in the sample
 #' @param AF_population a vector with the observed sample AFs
 #' @param OR a vector with the ORs 
-#' *NOTE* Make sure the vectors are in the same order for your variants
+#' @note
+#'  Make sure the vectors are in the same order for your variants
 #' @return returns a dataframe with two columns (AF_case, AF_control) and rows 
 #' equal to the number of variants
+#' @import genpwr
+#' @export 
 CaseControl_AF <- function(N_case, N_control, AF_population, OR){
   
-  require('genpwr')
+  require(genpwr)
   
   #calculate total sample size
   N_total = N_control+N_case
@@ -22,7 +30,7 @@ CaseControl_AF <- function(N_case, N_control, AF_population, OR){
   
   for(i in 1:length(a)) {
     #find roots of quadratic eq and choose root between 0 and 1 as AF_control
-    AF_control_opts =  genpwr::quad_roots(a[i], b[i], c[i])
+    AF_control_opts =  quad_roots(a[i], b[i], c[i])
     if(AF_control_opts[1]>1 | AF_control_opts[1]<0){
       AF_control[i] = AF_control_opts[2]
     }else{

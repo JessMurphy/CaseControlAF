@@ -2,10 +2,9 @@
 % Please edit documentation in R/CaseControl_SE.R
 \name{CaseControl_SE}
 \alias{CaseControl_SE}
-\title{function to calculate case/control/population frequencies from summary data
-uses the GroupFreq function adapted from C from https://github.com/Paschou-Lab/ReAct/blob/main/GrpPRS_src/CountConstruct.c}
+\title{CaseControl_SE}
 \usage{
-CaseControl_SE(OR, se, nCase, nControl)
+CaseControl_SE(OR, se, nCase, nControl, AF_obs = 0)
 }
 \arguments{
 \item{OR}{a vector of odds ratios}
@@ -20,6 +19,8 @@ CaseControl_SE(OR, se, nCase, nControl)
 a dataframe with 3 columns: pCase, pControl, pPop for the estimated AFs for each variant which are the rows
 }
 \description{
-function to calculate case/control/population frequencies from summary data
-uses the GroupFreq function adapted from C from https://github.com/Paschou-Lab/ReAct/blob/main/GrpPRS_src/CountConstruct.c
+This is a function to derive the case and control AFs from GWAS summary statistics when 
+the user has access to the whole sample AF, the sample sizes, and the OR (or beta).
+If user has SE instead of sample AF use [CaseControlAF::CaseControl_SE()]
+This code uses the GroupFreq function adapted from C from <https://github.com/Paschou-Lab/ReAct/blob/main/GrpPRS_src/CountConstruct.c>
 }

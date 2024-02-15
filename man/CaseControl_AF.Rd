@@ -2,7 +2,7 @@
 % Please edit documentation in R/CaseControl_AF.R
 \name{CaseControl_AF}
 \alias{CaseControl_AF}
-\title{Method to reconstruct case and control AFs from the sample observed AF}
+\title{CaseControl_AF}
 \usage{
 CaseControl_AF(N_case, N_control, AF_population, OR)
 }
@@ -13,13 +13,17 @@ CaseControl_AF(N_case, N_control, AF_population, OR)
 
 \item{AF_population}{a vector with the observed sample AFs}
 
-\item{OR}{a vector with the ORs 
-*NOTE* Make sure the vectors are in the same order for your variants}
+\item{OR}{a vector with the ORs}
 }
 \value{
 returns a dataframe with two columns (AF_case, AF_control) and rows 
 equal to the number of variants
 }
 \description{
-Method to reconstruct case and control AFs from the sample observed AF
+This is a function to derive the case and control AFs from GWAS summary statistics when 
+the user has access to the whole sample AF, the sample sizes, and the OR (or beta).
+If user has SE instead of sample AF use [CaseControlAF::CaseControl_SE()]
+}
+\note{
+Make sure the vectors are in the same order for your variants
 }
