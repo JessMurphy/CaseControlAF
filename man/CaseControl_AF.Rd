@@ -22,7 +22,7 @@ equal to the number of variants
 \description{
 This is a function to derive the case and control AFs from GWAS summary statistics when 
 the user has access to the whole sample AF, the sample sizes, and the OR (or beta).
-If user has SE instead of sample AF use [CaseControlAF::CaseControl_SE()]
+If user has SE instead of sample AF use \link[CaseControlAF]{CaseControl_SE}
 }
 \note{
 Make sure the vectors are in the same order for your variants
