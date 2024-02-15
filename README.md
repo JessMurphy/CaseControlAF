@@ -17,8 +17,11 @@ Use this function when you have the following statistics (for each variant)
 
 ### Usage
 **N_case**: an integer for the number of case samples
+
 **N_control**: an integer for the number of control samples
+
 **OR**: a vector of doubles with the OR for each variant
+
 **AF_population**: a vector of doubles with the AF for each variant
 
 **Return**: Returns a dataframe with two columns with names: AF_case and AF_control. The number of rows is equal to the number of variants
@@ -43,8 +46,11 @@ Use this function when you have the following statistics (for each variant)
 
 ### Usage
 **N_case**: an integer for the number of case samples
+
 **N_control**: an integer for the number of control samples
+
 **OR**: a vector of doubles with the OR for each variant
+
 **SE**: a vector of doubles with the SE(log(OR)) for each variant
 
 **Return**: Returns a dataframe with three columns with names: pCase, pControl and pPop. The number of rows is equal to the number of variants
