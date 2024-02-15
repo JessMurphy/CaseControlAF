@@ -100,7 +100,7 @@ CaseControl_SE <- function(OR, SE, N_case, N_control) {
                     pControl = rep(0, length(OR)),
                     pPop = rep(0, length(OR)))
   for(i in 1:length(OR)) {
-    res[i,] <- GroupFreq(SE[i], nCase = N_case, N_control, OR[i])
+    res[i,] <- GroupFreq(SE[i], nCase = N_case, nControl = N_control, OR[i])
   }
   
   return(res)
