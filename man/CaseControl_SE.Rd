@@ -4,7 +4,7 @@
 \alias{CaseControl_SE}
 \title{CaseControl_SE}
 \usage{
-CaseControl_SE(OR, se, nCase, nControl, AF_obs = 0)
+CaseControl_SE(OR, SE, N_case, N_control)
 }
 \arguments{
 \item{OR}{a vector of odds ratios}

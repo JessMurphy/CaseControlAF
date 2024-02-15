@@ -95,12 +95,12 @@ GroupFreq <- function(se, nCase, nControl, OR, freq = 0.0) {
 #' @param nControl an integer of the number of Control individuals
 #' @return a dataframe with 3 columns: pCase, pControl, pPop for the estimated AFs for each variant which are the rows
 #' @export 
-CaseControl_SE <- function(OR, se, nCase, nControl, AF_obs = 0) {
+CaseControl_SE <- function(OR, SE, N_case, N_control) {
   res <- data.frame(pCase = rep(0, length(OR)),
                     pControl = rep(0, length(OR)),
                     pPop = rep(0, length(OR)))
   for(i in 1:length(OR)) {
-    res[i,] <- GroupFreq(se[i], nCase, nControl, OR[i])
+    res[i,] <- GroupFreq(SE[i], nCase = N_case, N_control, OR[i])
   }
   
   return(res)
