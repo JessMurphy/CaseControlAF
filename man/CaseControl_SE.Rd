@@ -21,6 +21,6 @@ a dataframe with 3 columns: pCase, pControl, pPop for the estimated AFs for each
 \description{
 This is a function to derive the case and control AFs from GWAS summary statistics when 
 the user has access to the whole sample AF, the sample sizes, and the OR (or beta).
-If user has SE instead of sample AF use [CaseControlAF::CaseControl_SE()]
-This code uses the GroupFreq function adapted from C from <https://github.com/Paschou-Lab/ReAct/blob/main/GrpPRS_src/CountConstruct.c>
+If user has SE instead of sample AF use \link[CaseControlAF]{CaseControl_AF}
+This code uses the GroupFreq function adapted from C from \url{https://github.com/Paschou-Lab/ReAct/blob/main/GrpPRS_src/CountConstruct.c}
 }
