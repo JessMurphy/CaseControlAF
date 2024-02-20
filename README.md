@@ -8,6 +8,14 @@ The package contains two functions:
 1) CaseControl_AF
 2) CaseControl_SE
 
+## Download the package
+To download this package using *devtools* in R:
+
+```R
+require(devtools)
+devtools::install_github("https://github.com/wolffha/CaseControlAF")
+```
+
 ## CaseControl_AF
 Use this function when you have the following statistics (for each variant)
 * Number of cases
