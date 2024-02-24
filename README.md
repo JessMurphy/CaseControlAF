@@ -1,7 +1,7 @@
 # CaseControlAF
-Case Control AF Reconstruction R Package
+Case Control Allele Frequency (AF) Reconstruction R Package
 
-This repository contains the source code for the CaseControlAF R package which can be used to reconstruct the AF for cases and controls separately given commonly available summary statistics. 
+This repository contains the source code for the CaseControlAF R package which can be used to reconstruct the allele frequency (AF) for cases and controls separately given commonly available summary statistics. 
 
 The package contains two functions:
 
@@ -12,7 +12,7 @@ The package contains two functions:
 Use this function when you have the following statistics (for each variant)
 * Number of cases
 * Number of controls
-* OR or beta
+* Odds ratio (OR) or beta coefficient
 * **AF** for the whole sample (cases and controls combined)
 
 ### Usage
@@ -20,17 +20,17 @@ Use this function when you have the following statistics (for each variant)
 
 **N_control**: an integer for the number of control samples
 
-**OR**: a vector of doubles with the OR for each variant
+**OR**: a numeric vector with the odds ratio (OR) or beta coefficient for each variant
 
 **AF_population**: a vector of doubles with the AF for each variant
 
-**Return**: Returns a dataframe with two columns with names: AF_case and AF_control. The number of rows is equal to the number of variants
+Returns a dataframe with two columns: AF_case and AF_control. The number of rows is equal to the number of variants.
 
 ## CaseControl_SE
 Use this function when you have the following statistics (for each variant)
 * Number of cases
 * Number of controls
-* OR or beta
+* Odds ratio (OR) or beta coefficient
 * **SE** of the log(OR) for each variant
 
 *Code adapted from ReACt GroupFreq function available here: [(https://github.com/Paschou-Lab/ReAct/blob/main/GrpPRS_src/CountConstruct.c)]*
@@ -40,20 +40,21 @@ Use this function when you have the following statistics (for each variant)
 
 **N_control**: an integer for the number of control samples
 
-**OR**: a vector of doubles with the OR for each variant
+**OR**: a numeric vector with the odds ratio (OR) or beta coefficient for each variant
 
 **SE**: a vector of doubles with the SE(log(OR)) for each variant
 
-**Return**: Returns a dataframe with three columns with names: pCase, pControl and pPop. The number of rows is equal to the number of variants
-**NOTE:** This method assumes we are estimating the minor allele frequency 
+Returns a dataframe with three columns: pCase, pControl and pPop (It is not obvious what these columns represent - are they the standard errors or p-values?). The number of rows is equal to the number of variants.
+
+**NOTE:** This method assumes we are estimating the minor allele frequency. 
 
 ## A small example
 
 ``` r
 # load the data
-data("SampleDat")
+data("SampleDat") # is it worth giving a brief description of the sample data (was it simulated or adapted from real data?)
 
-nCase_sample = 79148
+nCase_sample = 79148 # where did these numbers come from or are they completely random?
 nControl_sample = 61106
 
 head(SampleDat)
@@ -64,6 +65,12 @@ head(SampleDat)
 #4    4  0.7554     0.7379   0.2446      0.2621 0.0091 1.10
 #5    5  0.3675     0.3575   0.3675      0.3575 0.0083 1.06
 #6    6  0.7141     0.6995   0.2859      0.3005 0.0087 1.07
+
+# this is very minor, but you describe the CaseControl_AF function first then the CaseControl_SE function
+# so I would maybe show them in the same order in the example
+
+# also, can the plots take up less room vertically and can the "Case" and "Control" labels as well as the
+# axis numbers be made a little larger?
 
 se_method_results <- CaseControl_SE(N_case = nCase_sample,
                                     N_control = nControl_sample,
@@ -78,6 +85,10 @@ head(se_method_results)
 #4 0.2354858 0.2192349 0.2284056
 #5 0.3058994 0.2967891 0.3019302
 #6 0.2657115 0.2521924 0.2598215
+
+# it might be useful to include your code to generate the plots as well
+# for instance, did you use any of the above variables (pCase, pControl, or pPop) for the plot below?
+# the plot below also uses true_AF which you don't calculate until the next code chunk
 ```
 ![](man/figures/CaseControl_SE_example.png)
 
