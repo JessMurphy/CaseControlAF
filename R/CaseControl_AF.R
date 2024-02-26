@@ -17,6 +17,9 @@
 CaseControl_AF <- function(N_case, N_control, AF_population, OR){
   
   require(genpwr) #why is this package needed? what function(s) are from it?
+
+  # I think spaces between operations and variable names would make the equations easier to read, but that's personal preference
+  # I would just be consistent with either including them or not in both functions
   
   #calculate total sample size
   N_total = N_control+N_case
