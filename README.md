@@ -20,9 +20,9 @@ Use this function when you have the following statistics (for each variant)
 
 **N_control**: an integer for the number of control samples
 
-**OR**: a numeric vector with the odds ratio (OR) or beta coefficient for each variant
+**OR**: a numeric vector with the odds ratio (OR) or beta coefficient for each variant (I would refer to R data types instead of doubles)
 
-**AF_population**: a vector of doubles with the AF for each variant
+**AF_population**: a numeric vector with the AF for each variant
 
 Returns a dataframe with two columns: AF_case and AF_control. The number of rows is equal to the number of variants.
 
@@ -44,7 +44,7 @@ Use this function when you have the following statistics (for each variant)
 
 **SE**: a vector of doubles with the SE(log(OR)) for each variant
 
-Returns a dataframe with three columns: pCase, pControl and pPop (It is not obvious what these columns represent - are they the standard errors or p-values?). The number of rows is equal to the number of variants.
+Returns a dataframe with three columns: pCase, pControl and pPop (It is not obvious what these columns represent - are they proportions?). The number of rows is equal to the number of variants.
 
 **NOTE:** This method assumes we are estimating the minor allele frequency. 
 
