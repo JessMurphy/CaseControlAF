@@ -1,28 +1,34 @@
-# Helper function for ReACt method to derive case/control AF using SE
-GroupFreq <- function(se, nCase, nControl, OR, freq = 0.0) {
+# Helper function for ReACt method to derive case/control AF using SE (I would provide the link to the ReACt method again here)
+GroupFreq <- function(se, nCase, nControl, OR, freq = 0.0) { # what does freq represent?
+
+  # do you have to use the x,y,w,z variable names based on the method or can you just use the original variable names which are more informative?
   x = 2*nCase
   y = 2*nControl
   w = se^2
   z = OR
-  
+
+  # is it possible to provide more documentation for the function and/or use more informative variable names?
+  # or do you expect people to lookup the method if they want more information? if so, ignore my comments
   
   #inflate w(se) by 1.001, for at max 49 times (usually can be done within 5 iterations. 
-  #maximum inflation is 0.050195, ~5%), if tmp2 still < 0 then give up
+  #maximum inflation is 0.050195, ~5%), if tmp2 still < 0 then give up (why does w(se) need to be inflated?)
   for(i in (1:50)) {
     w = w * (1.001^i)
-    tmp2 <- (((2*z*y*(1-z)) - (w*x*y*z))^2) - 4*(w*x*z + (1-z)^2)*(y*z*(x + y*z))
+    tmp2 <- (((2*z*y*(1-z)) - (w*x*y*z))^2) - 4*(w*x*z + (1-z)^2)*(y*z*(x + y*z)) # can you use spaces between variables and operations like you do below so it's easier to read? and why start with tmp2 not tmp1?
     if (tmp2 >= 0) {
       break
     }
   }
-  if (tmp2 < 0) { # if discriminate is <0 cannot solve and return 0s
+  if (tmp2 < 0) { # if discriminate is <0 cannot solve and return 0s (is tmp2 the discriminate? if so, can you relabel it or provide a note above stating that)
     resFrq <- data.frame(pCase = 0.0,
                          pControl = 0.0,
                          pPop = 0.0)
   } else { # actually solve the allele frequency
     tmp1 <- w * x * y * z - (2 * y * z * (1 - z))
-    tmp2 = tmp2^0.5
-    tmp3 = 2*(w*x*z + (1-z)^2)
+    tmp2 = tmp2^0.5 # do you need to rewrite the variable or can you just use tmp2^0.5 for d1 and d2 instead?
+    tmp3 = 2*(w*x*z + (1-z)^2) # again can you use spaces between variables and operations?
+
+    # are a-d elements of a 2x2 matrix? if so, I would state that
     
     d1 = (tmp1 - tmp2) / tmp3
     c1 = y - d1
@@ -35,7 +41,8 @@ GroupFreq <- function(se, nCase, nControl, OR, freq = 0.0) {
     b2 = x * d2 / ((z * y) - (z * d2) + d2)
     a2 = x - b2
     frq2 = c2 / (c2 + d2)
-    
+
+    # what do the flags signify?
     flag1 = 0
     flag2 = 0
     
@@ -59,7 +66,7 @@ GroupFreq <- function(se, nCase, nControl, OR, freq = 0.0) {
     } else if (flag1 == 0 & flag2 == 1) {
       res = tmpRes2
     } else if (flag1 == 1 & flag2 == 1) {
-      if (abs(freq - frq1) < abs(freq - frq2)) { #use the larger value as it minimizes the fxn of interest
+      if (abs(freq - frq1) < abs(freq - frq2)) { #use the larger value as it minimizes the function of interest
         res = tmpRes1
       } else {
         res = tmpRes2
@@ -87,18 +94,21 @@ GroupFreq <- function(se, nCase, nControl, OR, freq = 0.0) {
 #' @title CaseControl_SE
 #' @description This is a function to derive the case and control AFs from GWAS summary statistics when 
 #' the user has access to the whole sample AF, the sample sizes, and the OR (or beta).
-#' If user has SE instead of sample AF use [CaseControlAF::CaseControl_SE()]
+#' If user has SE instead of sample AF use [CaseControlAF::CaseControl_SE()] - should this be updated to the other way around?
 #' This code uses the GroupFreq function adapted from C from <https://github.com/Paschou-Lab/ReAct/blob/main/GrpPRS_src/CountConstruct.c>
-#' @param OR a vector of odds ratios
-#' @param se a vector of standard errors for the OR calculation *make sure the indices match between the two vectors
+#' @param OR a numeric vector of odds ratios (or beta coefficients)
+#' @param se a numeric vector of standard errors for the OR calculation *make sure the indices match between the two vectors
 #' @param nCase an integer of the number of Case individuals
 #' @param nControl an integer of the number of Control individuals
-#' @return a dataframe with 3 columns: pCase, pControl, pPop for the estimated AFs for each variant which are the rows
+#' @return a dataframe with 3 columns: pCase, pControl, pPop for the estimated AFs for each variant which are the rows (Can you not use MAF_Case, MAF_Control, and MAF_Pop instead? The 'p' prefix is confusing to me.)
 #' @export 
+
 CaseControl_SE <- function(OR, SE, N_case, N_control) {
+  
   res <- data.frame(pCase = rep(0, length(OR)),
                     pControl = rep(0, length(OR)),
                     pPop = rep(0, length(OR)))
+  
   for(i in 1:length(OR)) {
     res[i,] <- GroupFreq(SE[i], nCase = N_case, nControl = N_control, OR[i])
   }
