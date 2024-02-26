@@ -16,12 +16,12 @@
 #' @export 
 CaseControl_AF <- function(N_case, N_control, AF_population, OR){
   
-  require(genpwr)
+  require(genpwr) #why is this package needed? what function(s) are from it?
   
   #calculate total sample size
   N_total = N_control+N_case
   
-  #set a, b, c of quadratic equation derived in pdf
+  #set a, b, c of quadratic equation derived in pdf (what pdf and derived where? can you provide a link or more information?)
   a = (N_control/N_case)*(OR-1)
   b = (OR-((N_total/N_case)*AF_population*OR))+((N_control/N_case)+(N_total*AF_population/N_case))
   c = -(N_total/N_case)*AF_population
@@ -39,10 +39,10 @@ CaseControl_AF <- function(N_case, N_control, AF_population, OR){
   }
   
   
-  #calculate AF_case with known relationship shown in pdf
+  #calculate AF_case with known relationship shown in pdf (same comment as above about the pdf)
   AF_case = (N_total/N_case)*AF_population - (N_control/N_case)*AF_control
   
-  #Output shows case AF first, then control AF
+  #output shows case AF first, then control AF
   return(data.frame(AF_case = AF_case,
                     AF_control = AF_control))
 }
